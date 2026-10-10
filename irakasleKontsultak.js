@@ -8,7 +8,7 @@ async function getAriketakByMota(mota) {
 
 (async () => {
   try {
-    var ariketak = await getAriketakByMota("test");
+    var ariketak = await getAriketakByMota("P1");
     console.log(JSON.stringify(ariketak, null, 2));
   } catch (e) {
     console.error(e);
