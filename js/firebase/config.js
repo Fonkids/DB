@@ -2,7 +2,7 @@ require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
 const admin = require("firebase-admin");
-const { createClient } = require("@supabase/supabase-js");
+
 
 function requireEnv(name) {
   const value = process.env[name];
@@ -22,11 +22,6 @@ admin.initializeApp({
 
 const dbRef = admin.database().ref();
 
-// ---- Supabase SDK konfigurazioa ----
-const supabase = createClient(
-  requireEnv("SUPABASE_URL"),
-  requireEnv("SUPABASE_PUBLISHABLE_KEY")
-);
-const storageSB = supabase.storage;
 
-module.exports = { admin, dbRef, supabase, storageSB };
+
+module.exports = {admin, dbRef };
