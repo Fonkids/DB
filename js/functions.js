@@ -1,33 +1,57 @@
-// Exekutatzeko node js/functions.js
-const getAriketakByMota = require("./firebase/database");
-const getMultimediaUrl = require("./supabase/storage");
+const { getAriketakByMota, getGalderak } = require("./firebase/database");
+const { getMultimediaUrl } = require("./supabase/storage");
+
+function print(label, value) {
+  console.log(`\n# ${label}`);
+  if (value !== undefined) console.log(JSON.stringify(value, null, 2));
+}
+
+async function listMultimediaUrls(mota = "P2") {
+  const ariketak = await getAriketakByMota(mota);
+
+  if (!Array.isArray(ariketak) || ariketak.length === 0) {
+    console.log(`No ariketak found for category: ${mota}`);
+    return [];
+  }
+
+  const results = [];
+
+  for (const ariketa of ariketak) {
+    const galderak = await getGalderak(ariketa.id);
+
+    for (const galdera of galderak) {
+      const multimedia = [
+        ["galdera", galdera.galdera],
+        ...Object.entries(galdera.erantzunak || {}).map(([id, answer]) => [`erantzunak.${id}`, answer]),
+      ].filter(([, value]) => value && value.formatua && value.formatua !== "testua" && value.edukia);
+
+      for (const [field, value] of multimedia) {
+        const url = await getMultimediaUrl(ariketa.id, value.edukia);
+        results.push({ ariketaId: ariketa.id, elementuId: galdera.id, field, url });
+      }
+    }
+  }
+
+  return results;
+}
+
+async function main() {
+  try {
+    const mediaUrls = await listMultimediaUrls("P8");
+
+    if (!mediaUrls.length) {
+      console.log("No media URLs were generated.");
+      return;
+    }
+
+    console.log("MEDIA URLS:");
+    for (const entry of mediaUrls) {
+      console.log(`${entry.ariketaId} / ${entry.field}: ${entry.url}`);
+    }
+  } catch (error) {
+    console.error("Script failed:", error);
+  }
+}
 
 
-(async () => {
-    try {
-      var ariketak = await getAriketakByMota("P1");
-      console.log(JSON.stringify(ariketak, null, 2));
-      if (!ariketak) {
-        console.log("Ez da ariketarik aurkitu mota honetarako: P1");
-        return;
-      }
-  
-      for (const [ariketaId, ariketa] of Object.entries(ariketak)) {
-        for (const [elementuId, elementua] of Object.entries(ariketa.elementuak || {})) {
-          const multimediaEdukiak = [
-            ["galdera", elementua.galdera],
-            ...Object.entries(elementua.erantzunak || {}),
-          ];
-  
-          for (const [edukiMota, edukia] of multimediaEdukiak) {
-            if (edukia && edukia.formatua !== "testua") {
-              const url = getMultimediaUrl(ariketaId, edukia.edukia);
-              console.log(`${ariketaId}/${elementuId} ${edukiMota}: ${url}`);
-            }
-          }
-        }
-      }
-    } catch (e) {
-      console.error(e);
-    } 
-  })();
+  main();
