@@ -1,6 +1,6 @@
 const { getAriketakByMota, getGalderak } = require("./firebase/database");
 const { getMultimediaUrl } = require("./supabase/storage");
-
+// PROBA: ARIKETA GUZTIAK LORTU + MULTIMEDIA ESTEKAK
 
 
 async function listMultimediaUrls(mota = "P2") {

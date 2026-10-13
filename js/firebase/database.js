@@ -69,7 +69,10 @@ async function createTaldea(teacherUid, izena, ikasturtea, ikasleUids) {
   await newRef.set({ irakasleaId: teacherUid, izena, ikasturtea, kideak });
   return newRef.key;
 }
-
+async function getIkasleak(){
+  const queryResult = await dbRef.child("users").orderByChild("role").equalTo("student").get();
+  return snapToArray(queryResult);
+}
 async function getTaldeakByIrakaslea(teacherUid) {
   const queryResult = await dbRef.child("taldeak").orderByChild("irakasleaId").equalTo(teacherUid).get();
   return snapToArray(queryResult).map((taldea) => ({
@@ -94,7 +97,7 @@ async function getTaldeStats(taldeaId) {
 
     return {
       uid,
-      izena: user?.izena || uid,
+      izena: user?.username || uid,
       amaituak: amaituak.length,
       batezbestekoa,
     };
@@ -122,3 +125,5 @@ module.exports.getTaldeakByIrakaslea = getTaldeakByIrakaslea;
 module.exports.getTaldeStats = getTaldeStats;
 module.exports.getSesioak = getSesioak;
 module.exports.getSaiakerak = getSaiakerak;
+module.exports.getIkasleak = getIkasleak;
+
