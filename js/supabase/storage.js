@@ -23,9 +23,24 @@ async function getMultimediaUrl(ariketaId, edukia) {
   return getFileUrl("multimedia", `${ariketaId}/${edukia}`);
 }
 
+async function updateMultimedia(ariketaId, edukia, file) {
+  await uploadFile("multimedia", `${ariketaId}/${edukia}`, file);
+}
+
+async function deleteMultimedia(ariketaId, edukia) {
+  await deleteFile("multimedia", `${ariketaId}/${edukia}`);
+}
 
 async function getAvatarUrl(uid, pfp) {
   return getFileUrl("pfp", `${uid}/${pfp}`);
+}
+
+async function updateAvatar(uid, pfp, file) {
+  await uploadFile("pfp", `${uid}/${pfp}`, file);
+}
+
+async function deleteAvatar(uid, pfp) {
+  await deleteFile("pfp", `${uid}/${pfp}`);
 }
 
 
@@ -34,3 +49,7 @@ module.exports.getFileUrl = getFileUrl;
 module.exports.uploadFile = uploadFile;
 module.exports.deleteFile = deleteFile;
 module.exports.getAvatarUrl = getAvatarUrl;
+module.exports.updateAvatar = updateAvatar;
+module.exports.deleteAvatar = deleteAvatar;
+module.exports.updateMultimedia = updateMultimedia;
+module.exports.deleteMultimedia = deleteMultimedia;
