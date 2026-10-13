@@ -1,10 +1,7 @@
 const { getAriketakByMota, getGalderak } = require("./firebase/database");
 const { getMultimediaUrl } = require("./supabase/storage");
 
-function print(label, value) {
-  console.log(`\n# ${label}`);
-  if (value !== undefined) console.log(JSON.stringify(value, null, 2));
-}
+
 
 async function listMultimediaUrls(mota = "P2") {
   const ariketak = await getAriketakByMota(mota);
