@@ -31,6 +31,7 @@ async function startSesioa(uid) {
 }
 
 async function saveSaiakera(uid, sesioId, ariketaId, zkia, saiakera) {
+
   await dbRef
     .child(`sesioak/${uid}/${sesioId}/saiakerak/${ariketaId}_${zkia}`)
     .set(saiakera);
@@ -120,6 +121,11 @@ async function getSaiakerak(uid, sesioId) {
   return snapshot.val() || {};
 }
 
+async function updatePfpPath(uid, filename) {
+  await dbRef.child(`users/${uid}/pfp`).set(filename);
+
+}
+
 
 module.exports.getAriketakByMota = getAriketakByMota;
 module.exports.getGalderak = getGalderak;
@@ -132,4 +138,4 @@ module.exports.getTaldeStats = getTaldeStats;
 module.exports.getSesioak = getSesioak;
 module.exports.getSaiakerak = getSaiakerak;
 module.exports.getIkasleak = getIkasleak;
-
+module.exports.updatePfpPath = updatePfpPath;

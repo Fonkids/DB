@@ -17,4 +17,18 @@ const supabase = createClient(
 );
 const storageSB = supabase.storage;
 
-module.exports = {supabase, storageSB };
+function createStorageAdminClient() {
+  const serviceKey =
+    process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!serviceKey) {
+    throw new Error(
+      "Missing SUPABASE_SECRET_KEY or SUPABASE_SERVICE_ROLE_KEY (check your .env file)"
+    );
+  }
+
+  return createClient(requireEnv("SUPABASE_URL"), serviceKey, {
+    auth: { persistSession: false, autoRefreshToken: false },
+  }).storage;
+}
+
+module.exports = { supabase, storageSB, createStorageAdminClient };

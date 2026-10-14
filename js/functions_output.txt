@@ -1,0 +1,62 @@
+/*EXEKUTATZEKO: node js/functions.js*/
+
+OUTPUT:
+ node .\js\functions.js
+◇ injected env (9) from .env
+◇ injected env (0) from .env
+PFPa eguneratuta!: https://mvxztonkgrnknakfpqmr.supabase.co/storage/v1/object/public/pfp/UUNKIaNL1RZiwEi6afesrRWOmGE3/holaPFP_aesthetic_increible_fonkids_wow_boom_incredible_omg_damn_ze_guay_def_def_final_(1).png
+[
+  {
+    "id": "g01",
+    "erantzunak": {
+      "a1": {
+        "edukia": "txakurra",
+        "formatua": "testua",
+        "zuzena": true
+      }
+    },
+    "galdera": {
+      "edukia": "g01_irudia.png",
+      "formatua": "irudia"
+    },
+    "ordena": 1
+  },
+  {
+    "id": "g02",
+    "erantzunak": {
+      "a1": {
+        "edukia": "katua",
+        "formatua": "testua",
+        "zuzena": true
+      }
+    },
+    "galdera": {
+      "edukia": "g02_irudia.jpg",
+      "formatua": "irudia"
+    },
+    "ordena": 2
+  },
+  {
+    "id": "g03",
+    "erantzunak": {
+      "a1": {
+        "edukia": "zaldia",
+        "formatua": "testua",
+        "zuzena": true
+      }
+    },
+    "galdera": {
+      "edukia": "g03_galdera.aac",
+      "formatua": "audioa"
+    },
+    "ordena": 3
+  }
+]
+MEDIA URLS (3):
+A3 / galdera: https://mvxztonkgrnknakfpqmr.supabase.co/storage/v1/object/public/multimedia/A3/g01_irudia.png
+A3 / galdera: https://mvxztonkgrnknakfpqmr.supabase.co/storage/v1/object/public/multimedia/A3/g02_irudia.jpg
+A3 / galdera: https://mvxztonkgrnknakfpqmr.supabase.co/storage/v1/object/public/multimedia/A3/g03_galdera.aac
+Saiakera bat egin da: Ariketa A3 / Galdera 1
+Saiakera bat egin da: Ariketa A3 / Galdera 2
+Sesioa amaituta: -P3wSsKT0OQxvOocA-0O
+Emaitzak:  {"amaituta":true,"puntuazioaGuztira":15,"zuzenak":4,"okerrak":2}
